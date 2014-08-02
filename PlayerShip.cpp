@@ -2,11 +2,12 @@
 
 PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): Ship(scene, engine, view) {
   std::vector<b2Vec2> ship_crds = { {0, 0}, {.1, .1}, {0.2,0.025}, {.3333,.15}, {.2,.275}, {.1,.2}, {0,.3333} };
-  _polyshape = new b2PolygonShape;
-  _polyshape->Set(ship_crds.data(), ship_crds.size());
+  b2PolygonShape* polyshape = new b2PolygonShape;
+  polyshape->Set(ship_crds.data(), ship_crds.size());
 
   _body = engine->createBody(b2_dynamicBody, 2, -5, 0, false);
-  b2Fixture* fixture = engine->createFixture(_body, _polyshape);
+  _body->SetFixedRotation(true);
+  b2Fixture* fixture = engine->createFixture(_body, polyshape);
   fixture->SetRestitution(1);
   fixture->SetFriction(0);
 

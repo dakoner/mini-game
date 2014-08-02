@@ -19,14 +19,18 @@ SOURCES += \
     main.cpp \
     qworldview.cpp \
     Ship.cpp \
-    PlayerShip.cpp
+    PlayerShip.cpp \
+    EnemyShip.cpp \
+    World.cpp
 
 HEADERS  += \
     qworldview.h \
     box2dengine.h \
     MotionFilter.h \
     Ship.h \
-    PlayerShip.h
+    PlayerShip.h \
+    EnemyShip.h \
+    World.h
 
 
 FORMS    += 

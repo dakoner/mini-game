@@ -6,7 +6,9 @@
 #include "QGraphicsScene"
 #include "box2dengine.h"
 #include "Box2D/Box2D.h"
-#include "Ship.h"
+#include "PlayerShip.h"
+#include "EnemyShip.h"
+#include "World.h"
 
 class QWorldView : public QGraphicsView
 {
@@ -18,7 +20,9 @@ public:
 private:
   QtBox2DEngine *_engine;
   QGraphicsScene *_scene;
-  Ship* _ship;
+  PlayerShip* _player_ship;
+  EnemyShip* _enemy_ship;
+  World* _world;
 };
 
 #endif // QWORLDVIEW_H

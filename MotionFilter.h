@@ -14,8 +14,8 @@
 #include "box2dengine.h"
 #include "Ship.h"
 
-// Would prefer to not require this class at all,
-// but it seems required for handling scene-level mouse and touch events properly.
+// Would prefer to not require this class at all, but it seems
+// required for handling scene-level mouse and touch events properly.
 
 class SceneMotionFilter : public QObject
 {
