@@ -6,6 +6,7 @@
 #include "qworldview.h"
 #include "QtGui/QtGui"
 #include "MotionFilter.h"
+#include "PlayerShip.h"
 
 const float view_scale = 72.;
 
@@ -23,7 +24,7 @@ QWorldView::QWorldView(QtBox2DEngine* engine, QWidget *parent) :
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  _ship = new Ship(this, _scene, engine);
+  _ship = new PlayerShip(_scene, engine, this);
 
   // Detect user/scene input
   SceneMotionFilter* scene_motion_filter = new SceneMotionFilter(_ship);

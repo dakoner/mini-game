@@ -19,21 +19,19 @@ class Ship: public QObject
   Q_OBJECT
 
 public:
-  Ship(QGraphicsView* view, QGraphicsScene* scene, QtBox2DEngine* engine);
+  Ship(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
   b2Body* Body();
 
   bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
-  void update();
+  virtual void update() = 0;
 
-private:
-  QGraphicsView* _view;
+protected:
+  b2Body* _body;
   QGraphicsScene* _scene;
   QtBox2DEngine* _engine;
-  b2PolygonShape *_polyshape;
-  b2Body* _body;
-  QGraphicsPolygonItem* _pi;
+  QGraphicsView* _view;
 };
 
 #endif
