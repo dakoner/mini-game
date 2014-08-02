@@ -11,7 +11,7 @@ EnemyShip::EnemyShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView
   fixture->SetRestitution(1);
   fixture->SetFriction(0);
 
-  QVector<QPointF> polygon_crds = { { 1./10., 0. }, {3./10., 0.}, {4./10.,1./10.}, {3./10.,2./10.}, {1./10.,2./10.}, {0.,1./10.} };
+  QVector<QPointF> polygon_crds = { { 1./10., 0. }, {3./10., 0.}, {4./10.,-1./10.}, {3./10.,-2./10.}, {1./10.,-2./10.}, {0.,-1./10.} };
   QPolygonF polygon(polygon_crds);
   QPen p(Qt::white);
   p.setWidth(0);
