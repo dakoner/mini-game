@@ -16,14 +16,18 @@ TEMPLATE = app
 
 SOURCES += \
     box2dengine.cpp \
-    test.cpp
+    main.cpp \
+    qworldview.cpp \
+    Ship.cpp
 
 HEADERS  += \
+    qworldview.h \
     box2dengine.h \
     MotionFilter.h \
-    UpdateReceiver.h
+    Ship.h
 
-FORMS    +=
+
+FORMS    += 
 
 CONFIG += mobility
 MOBILITY = 
