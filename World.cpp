@@ -45,7 +45,7 @@ World::World(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view):
   {
     QList<QPointF> points;
     for (unsigned int i = 0; i < stalagmites.size(); ++i)
-      points.push_back(QPointF(i,10.-stalagmites[i]));
+      points.push_back(QPointF(i,10-stalagmites[i]));
     addChain(stalagmites_body, scene, engine,  points);
   }
   addLine(stalagtites_body, scene, engine,0,0,0,10);

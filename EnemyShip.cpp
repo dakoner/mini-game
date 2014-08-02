@@ -21,9 +21,6 @@ EnemyShip::EnemyShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView
 
   b2Vec2 force(1,0);
   _body->ApplyForceToCenter(force, true);
-
-  connect(_engine, SIGNAL(step()), this, SLOT(update()));
-
 }
 
 void EnemyShip::update() {

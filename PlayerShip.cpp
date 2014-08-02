@@ -11,16 +11,13 @@ PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsVi
   fixture->SetRestitution(1);
   fixture->SetFriction(0);
 
-  QVector<QPointF> polygon_crds = { {0, 0}, {.1, .1}, {0.2,0.025}, {.3333,.15}, {.2,.275}, {.1,.2}, {0,.3333} };
+  QVector<QPointF> polygon_crds = { {0, 0}, {.1, -.1}, {0.2,-0.025}, {.3333,-.15}, {.2,-.275}, {.1,-.2}, {0,-.3333} };
   QPolygonF polygon(polygon_crds);
   QPen p(Qt::white);
   p.setWidth(0);
   _pi = _scene->addPolygon(polygon, p);
   _pi->setData(0, QVariant::fromValue((void *)_body));
   _pi->setPos(_body->GetPosition().x, -_body->GetPosition().y);
-
-  connect(_engine, SIGNAL(step()), this, SLOT(update()));
-
 }
 
 bool PlayerShip::eventFilter(QObject *obj, QEvent *event) {
@@ -48,7 +45,8 @@ bool PlayerShip::eventFilter(QObject *obj, QEvent *event) {
 }
 
 void PlayerShip::update() {
-  // a very sleek object
+  // Apply drag
+  // drag coefficient
   float Cd = 0.05f;
   b2Vec2 lv = _body->GetLinearVelocity();
   float v = lv.x * lv.x;
