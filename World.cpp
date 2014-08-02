@@ -1,3 +1,4 @@
+#include <iostream>
 #include "World.h"
 
 std::vector<int> stalagtites{0,0,0,0,1,1,2,2,1,1,1,3,1,0,0,1,4,0,0,1,0,0,0,0,2,2,2,2,2,3,3,4,4,3,0,0,0,0,0,1};
@@ -18,15 +19,16 @@ void addChain(b2Body* body, QGraphicsScene *scene, QtBox2DEngine* engine, const 
   QPen p(Qt::white);
   p.setWidth(0);
 
-  b2Vec2* vertices = new b2Vec2[points.size()-1];
+  b2Vec2* vertices = new b2Vec2[points.size()];
   for (int i=0; i < points.size()-1; ++i) {
 
     scene->addLine(points[i].x(), points[i].y(), points[i+1].x(), points[i+1].y(), p);
-
     vertices[i] = b2Vec2(points[i].x(), -points[i].y());
   }
+  vertices[points.size()-1] = b2Vec2(points[points.size()-1].x(), -points[points.size()-1].y());
+
   b2ChainShape *chain = new b2ChainShape;
-  chain->CreateChain(vertices, points.size()-1);
+  chain->CreateChain(vertices, points.size());
   b2Fixture* fixture = engine->createFixture(body, chain);\
   fixture->SetRestitution(1);
   fixture->SetFriction(0);
