@@ -21,7 +21,8 @@ SOURCES += \
     Ship.cpp \
     PlayerShip.cpp \
     EnemyShip.cpp \
-    World.cpp
+    World.cpp \
+    Diamond.cpp
 
 HEADERS  += \
     qworldview.h \
@@ -30,7 +31,8 @@ HEADERS  += \
     Ship.h \
     PlayerShip.h \
     EnemyShip.h \
-    World.h
+    World.h \
+    Diamond.h
 
 
 FORMS    += 

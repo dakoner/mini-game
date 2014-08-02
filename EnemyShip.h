@@ -15,7 +15,6 @@ private slots:
   void update();
 
 private:
-  b2PolygonShape *_polyshape;
   QGraphicsPolygonItem* _pi;
 };
 

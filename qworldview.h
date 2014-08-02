@@ -8,6 +8,7 @@
 #include "Box2D/Box2D.h"
 #include "PlayerShip.h"
 #include "EnemyShip.h"
+#include "Diamond.h"
 #include "World.h"
 
 class QWorldView : public QGraphicsView
@@ -22,6 +23,7 @@ private:
   QGraphicsScene *_scene;
   PlayerShip* _player_ship;
   EnemyShip* _enemy_ship;
+  std::vector<Diamond *> _diamonds;
   World* _world;
 };
 

@@ -17,7 +17,6 @@ private slots:
   void update();
 
 private:
-  b2ChainShape *_chainshape;
   QGraphicsPolygonItem* _pi;
 };
 

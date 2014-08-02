@@ -26,6 +26,9 @@ QWorldView::QWorldView(QtBox2DEngine* engine, QWidget *parent) :
   _player_ship = new PlayerShip(_scene, engine, this);
   _enemy_ship = new EnemyShip(_scene, engine, this);
   _world = new World(_scene, engine, this);
+  for (int i = 0; i < 10; ++i) {
+    _diamonds.push_back(new Diamond(_scene, engine, this));
+  }
 
   // Detect user/scene input
   SceneMotionFilter* scene_motion_filter = new SceneMotionFilter(_player_ship);
