@@ -31,7 +31,7 @@ protected:
             QGraphicsSceneMouseEvent *mouseEvent = static_cast<QGraphicsSceneMouseEvent *>(event);
             QPointF pos = mouseEvent->scenePos();
             b2Vec2 sp = _ship->Body()->GetPosition();
-            b2Vec2 mp(pos.x(), -pos.y());
+            b2Vec2 mp(pos.x(), pos.y());
             mp -= sp;
             mp *= 0.02;
             _ship->Body()->ApplyForceToCenter(mp, true);
