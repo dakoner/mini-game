@@ -1,13 +1,15 @@
 #include <iostream>
-#include "QtGui/QtGui"
+#include <set>
 #include <Box2D/Box2D.h>
 #include "box2dengine.h"
-#include "qworldview.h"
+#include <QGraphicsView>
+#include "Item.h"
+
 
 class MyContactListener: public QObject, public b2ContactListener {
   Q_OBJECT
 public:
-  MyContactListener(QtBox2DEngine* engine, QWorldView* view): _engine(engine), _view(view) {
+  MyContactListener(QtBox2DEngine* engine, QGraphicsView* view): _engine(engine), _view(view) {
     connect(_engine, &QtBox2DEngine::step, this, &MyContactListener::update);
   }
   void BeginContact(b2Contact* contact) {
@@ -32,7 +34,7 @@ private slots:
   void update() {
     for(auto& fixture : _fixtures_to_destroy) {
       Item* i = (Item*)fixture->GetUserData();
-      _view->_items.erase(i);
+      // _view->_items.erase(i);
       delete i;
       _engine->destroyBody(fixture->GetBody());
     }
@@ -40,7 +42,7 @@ private slots:
   }
 private:
   QtBox2DEngine* _engine;
-  QWorldView* _view;
+  QGraphicsView* _view;
   std::set<b2Fixture*> _fixtures_to_destroy;
 };
 

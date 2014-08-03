@@ -17,7 +17,6 @@ TEMPLATE = app
 SOURCES += \
     box2dengine.cpp \
     main.cpp \
-    qworldview.cpp \
     Ship.cpp \
     PlayerShip.cpp \
     EnemyShip.cpp \
@@ -26,7 +25,6 @@ SOURCES += \
     Item.cpp
 
 HEADERS  += \
-    qworldview.h \
     box2dengine.h \
     MotionFilter.h \
     Ship.h \
