@@ -8,7 +8,7 @@ class MyContactListener: public QObject, public b2ContactListener {
   Q_OBJECT
 public:
   MyContactListener(QtBox2DEngine* engine, QWorldView* view): _engine(engine), _view(view) {
-    connect(_engine, SIGNAL(step()), this, SLOT(update()));
+    connect(_engine, &QtBox2DEngine::step, this, &MyContactListener::update);
   }
   void BeginContact(b2Contact* contact) {
     uint16 cbA = contact->GetFixtureA()->GetFilterData().categoryBits;

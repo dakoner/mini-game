@@ -34,7 +34,7 @@ Diamond::Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* vi
   _pi->setPos(_body->GetPosition().x, _body->GetPosition().y);
   _pi->setBrush(QBrush(Qt::yellow, Qt::SolidPattern));
 
-  connect(_engine, SIGNAL(step()), this, SLOT(update()));
+  connect(_engine, &QtBox2DEngine::step, this, &Diamond::update);
 }
 void Diamond::update() {
   _pi->setPos(_body->GetPosition().x, _body->GetPosition().y);

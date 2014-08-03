@@ -25,12 +25,6 @@ QWorldView::QWorldView(QtBox2DEngine* engine, QWidget *parent) :
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  QGraphicsTextItem* ti = _scene->addText("Test");
-  ti->setDefaultTextColor(Qt::red);
-  ti->setX(0);
-  ti->setY(0);
-  ti->setScale(0.005);
-  
   _player_ship = new PlayerShip(_scene, engine, this);
   for (int i = 0; i < 3; ++i) {
     _enemy_ships.insert(new EnemyShip(_scene, engine, this));
