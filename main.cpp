@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <QGraphicsScene>
 #include "box2dengine.h"
-#include "World.h"
+#include "Cave.h"
 #include "Diamond.h"
 #include "PlayerShip.h"
 #include "EnemyShip.h"
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 
   QtBox2DEngine* engine = new QtBox2DEngine;
 
-  World* world = new World(scene, engine, view);
+  Cave* cave = new Cave(scene, engine, view);
   PlayerShip* player_ship = new PlayerShip(scene, engine, view);
   for (int i = 0; i < 3; ++i) {
     new EnemyShip(scene, engine, view);

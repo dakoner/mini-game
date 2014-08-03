@@ -34,7 +34,6 @@ private slots:
   void update() {
     for(auto& fixture : _fixtures_to_destroy) {
       Item* i = (Item*)fixture->GetUserData();
-      // _view->_items.erase(i);
       delete i;
       _engine->destroyBody(fixture->GetBody());
     }

@@ -1,12 +1,12 @@
 #include <QList>
 #include <QGraphicsItemGroup>
 #include <iostream>
-#include "World.h"
+#include "Cave.h"
 
 std::vector<int> stalagtites{0,0,0,0,1,1,2,2,1,1,1,3,1,0,0,1,4,0,0,1,0,0,0,0,2,2,2,2,2,3,3,4,4,3,0,0,0,0,0,1};
 std::vector<int> stalagmites{0,0,0,0,2,2,2,2,2,3,3,4,4,3,0,0,0,0,0,1,0,0,0,0,1,1,2,2,1,1,1,3,1,0,0,1,4,0,0,1};
 
-World::World(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): Item(scene, engine, view) {
+Cave::Cave(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): Item(scene, engine, view) {
   _body = _engine->createBody(b2_staticBody, 0, 0, 0, false);
   QList<QGraphicsItem*> items;
   {
@@ -27,7 +27,7 @@ World::World(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view):
   _it = _scene->createItemGroup(items);
 }
 
-void World::addLine(double x1, double y1, double x2, double y2, QList<QGraphicsItem*>* items) {
+void Cave::addLine(double x1, double y1, double x2, double y2, QList<QGraphicsItem*>* items) {
   QPen p(Qt::white);
   p.setWidth(0);
   items->append(_scene->addLine(QLineF(x1, y1, x2, y2), p));
@@ -42,7 +42,7 @@ void World::addLine(double x1, double y1, double x2, double y2, QList<QGraphicsI
   fixture->SetFilterData(b);
 }
 
-void World::addChain(const QList<QPointF>& points, QList<QGraphicsItem*>* items) {
+void Cave::addChain(const QList<QPointF>& points, QList<QGraphicsItem*>* items) {
   QPen p(Qt::white);
   p.setWidth(0);
 
