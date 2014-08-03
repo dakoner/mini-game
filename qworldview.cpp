@@ -8,7 +8,7 @@
 #include "MotionFilter.h"
 #include "MyContactListener.h"
 
-const float view_scale = 72.;
+const float view_scale = 108.;
 
 class QWorldView;
 QWorldView::QWorldView(QtBox2DEngine* engine, QWidget *parent) :
@@ -18,7 +18,7 @@ QWorldView::QWorldView(QtBox2DEngine* engine, QWidget *parent) :
 {
 
   setMouseTracking(true);
-  resize(1280,720);
+  resize(1920,1080);
   scale(view_scale, view_scale);
   setScene(_scene);
   setBackgroundBrush(QBrush(Qt::black, Qt::SolidPattern));
