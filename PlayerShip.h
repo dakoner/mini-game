@@ -9,6 +9,10 @@ class PlayerShip: public Ship
 
 public:
   PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
+  ~PlayerShip() {
+    _scene->removeItem(_pi);
+    delete _pi;
+  }
   b2Body* Body();
 
   bool eventFilter(QObject *obj, QEvent *event);

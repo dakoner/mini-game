@@ -32,7 +32,8 @@ HEADERS  += \
     PlayerShip.h \
     EnemyShip.h \
     World.h \
-    Diamond.h
+    Diamond.h \
+    MyContactListener.h
 
 
 FORMS    += 

@@ -9,6 +9,12 @@ class Diamond: public QObject
 
 public:
   Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
+  ~Diamond() {
+    _scene->removeItem(_pi);
+    delete _pi;
+  }
+private slots:
+  virtual void update();
 private:
   QGraphicsScene* _scene;
   QtBox2DEngine* _engine;

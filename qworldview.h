@@ -1,6 +1,6 @@
 #ifndef QWORLDVIEW_H
 #define QWORLDVIEW_H
-
+#include <set>
 #include <QMainWindow>
 #include "QGraphicsView"
 #include "QGraphicsScene"
@@ -11,19 +11,19 @@
 #include "Diamond.h"
 #include "World.h"
 
-class QWorldView : public QGraphicsView
+class QWorldView : public QGraphicsView, public b2ContactListener
 {
     Q_OBJECT
 
 public:
   explicit QWorldView(QtBox2DEngine* engine, QWidget *parent = 0);
+  std::set<EnemyShip* > _enemy_ships;
+  std::set<Diamond* > _diamonds;
 
 private:
   QtBox2DEngine *_engine;
   QGraphicsScene *_scene;
   PlayerShip* _player_ship;
-  EnemyShip* _enemy_ship;
-  std::vector<Diamond *> _diamonds;
   World* _world;
 };
 

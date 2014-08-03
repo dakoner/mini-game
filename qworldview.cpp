@@ -6,9 +6,11 @@
 #include "qworldview.h"
 #include "QtGui/QtGui"
 #include "MotionFilter.h"
+#include "MyContactListener.h"
 
 const float view_scale = 72.;
 
+class QWorldView;
 QWorldView::QWorldView(QtBox2DEngine* engine, QWidget *parent) :
   QGraphicsView(parent),
   _engine(engine),
@@ -24,10 +26,12 @@ QWorldView::QWorldView(QtBox2DEngine* engine, QWidget *parent) :
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
   _player_ship = new PlayerShip(_scene, engine, this);
-  _enemy_ship = new EnemyShip(_scene, engine, this);
+  for (int i = 0; i < 3; ++i) {
+    _enemy_ships.insert(new EnemyShip(_scene, engine, this));
+  }
   _world = new World(_scene, engine, this);
-  for (int i = 0; i < 10; ++i) {
-    _diamonds.push_back(new Diamond(_scene, engine, this));
+  for (int i = 0; i < 3; ++i) {
+    _diamonds.insert(new Diamond(_scene, engine, this));
   }
 
   // Detect user/scene input
@@ -35,5 +39,9 @@ QWorldView::QWorldView(QtBox2DEngine* engine, QWidget *parent) :
   // scene event filter required to get mouse events
   _scene->installEventFilter(scene_motion_filter);
   installEventFilter(_player_ship);
+
+  MyContactListener* myContactListenerInstance = new MyContactListener(_engine, this);
+  engine->setContactListener(myContactListenerInstance);
+
 }
 
