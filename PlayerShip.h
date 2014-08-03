@@ -2,6 +2,7 @@
 #define _PLAYER_SHIP_H_
 
 #include "Ship.h"
+#include "QtSensors/QTiltSensor"
 
 class PlayerShip: public Ship
 {
@@ -22,6 +23,7 @@ private slots:
 
 private:
   QGraphicsPolygonItem* _pi;
+  QTiltSensor ts;
 };
 
 #endif
