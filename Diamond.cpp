@@ -2,7 +2,7 @@
 #include "Diamond.h"
 #include <qglobal.h>
 
-Diamond::Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): _scene(scene), _engine(engine), _view(view) {
+Diamond::Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): Item(scene, engine, view) {
   std::vector<b2Vec2> ship_crds = { {0, 0},{.1,-.1},{.2,0,},{.1,.1} };
   b2PolygonShape* polyshape = new b2PolygonShape;
   polyshape->Set(ship_crds.data(), ship_crds.size());
@@ -29,13 +29,9 @@ Diamond::Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* vi
   QPolygonF polygon(polygon_crds);
   QPen p(Qt::white);
   p.setWidth(0);
-  _pi = _scene->addPolygon(polygon, p);
-  _pi->setData(0, QVariant::fromValue((void *)_body));
-  _pi->setPos(_body->GetPosition().x, _body->GetPosition().y);
-  _pi->setBrush(QBrush(Qt::yellow, Qt::SolidPattern));
+  _it = _scene->addPolygon(polygon, p);
+  _it->setData(0, QVariant::fromValue((void *)_body));
+  _it->setPos(_body->GetPosition().x, _body->GetPosition().y);
+  ((QGraphicsPolygonItem *)_it)->setBrush(QBrush(Qt::yellow, Qt::SolidPattern));
 
-  connect(_engine, &QtBox2DEngine::step, this, &Diamond::update);
-}
-void Diamond::update() {
-  _pi->setPos(_body->GetPosition().x, _body->GetPosition().y);
 }

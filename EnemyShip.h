@@ -9,17 +9,6 @@ class EnemyShip: public Ship
 
 public:
   EnemyShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
-  ~EnemyShip() {
-    _scene->removeItem(_pi);
-    delete _pi;
-  }
-  b2Body* Body();
-
-private slots:
-  void updatePosition();
-
-private:
-  QGraphicsPolygonItem* _pi;
 };
 
 #endif

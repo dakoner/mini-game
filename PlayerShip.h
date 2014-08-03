@@ -10,21 +10,14 @@ class PlayerShip: public Ship
 
 public:
   PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
-  ~PlayerShip() {
-    _scene->removeItem(_pi);
-    delete _pi;
-  }
-  b2Body* Body();
-
-  bool eventFilter(QObject *obj, QEvent *event);
+  virtual bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
-  void updatePosition();
+  void centerView();
   void updateDrag();
   void updateTilt();
 
 private:
-  QGraphicsPolygonItem* _pi;
   QTiltSensor ts;
 };
 

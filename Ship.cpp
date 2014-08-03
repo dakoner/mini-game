@@ -1,12 +1,4 @@
 #include "Ship.h"
-Ship::Ship(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): _scene(scene), _engine(engine), _view(view) {
-}
-
-
-b2Body* Ship::Body() { return _body; }
-
-bool Ship::eventFilter(QObject *obj, QEvent *event) {
-  // standard event processing
-  return QObject::eventFilter(obj, event);
+Ship::Ship(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): Item(scene, engine, view) {
 }
 

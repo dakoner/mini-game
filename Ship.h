@@ -13,28 +13,15 @@
 
 #include "Box2D/Box2D.h"
 #include "box2dengine.h"
+#include "Item.h"
 
-class Ship: public QObject
+class Ship: public Item
 {
   Q_OBJECT
 
 public:
   Ship(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
-  b2Body* Body();
 
-  virtual bool eventFilter(QObject *obj, QEvent *event);
-
-private slots:
-  // Currently pure virtual, but if we kept a pointer to the
-  // QGraphicsItem created by subclasses, we could put the position
-  // update in the base class
-  virtual void updatePosition() = 0;
-
-protected:
-  b2Body* _body;
-  QGraphicsScene* _scene;
-  QtBox2DEngine* _engine;
-  QGraphicsView* _view;
 };
 
 #endif
