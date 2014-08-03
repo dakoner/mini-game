@@ -20,7 +20,7 @@ SOURCES += \
     Ship.cpp \
     PlayerShip.cpp \
     EnemyShip.cpp \
-    World.cpp \
+    Cave.cpp \
     Diamond.cpp \
     Item.cpp
 
@@ -30,7 +30,7 @@ HEADERS  += \
     Ship.h \
     PlayerShip.h \
     EnemyShip.h \
-    World.h \
+    Cave.h \
     Diamond.h \
     MyContactListener.h \
     Item.h
