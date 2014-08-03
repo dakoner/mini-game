@@ -36,10 +36,10 @@ void addChain(b2Body* body, QGraphicsScene *scene, QtBox2DEngine* engine, const 
   b2Fixture* fixture = engine->createFixture(body, chain);\
   fixture->SetRestitution(1);
   fixture->SetFriction(0);
-  // b2Filter b;
-  // b.categoryBits = 0x8;
-  // b.maskBits = 0x1|0x2|0x4;
-  // fixture->SetFilterData(b);
+  b2Filter b;
+  b.categoryBits = 0x8;
+  b.maskBits = 0xffff;
+  fixture->SetFilterData(b);
 }
 
 World::World(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): _scene(scene), _engine(engine), _view(view) {

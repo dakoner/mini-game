@@ -13,6 +13,7 @@ public:
   void BeginContact(b2Contact* contact) {
     uint16 cbA = contact->GetFixtureA()->GetFilterData().categoryBits;
     uint16 cbB = contact->GetFixtureB()->GetFilterData().categoryBits;
+    std::cout << cbA << " " << cbB << std::endl;
     if (cbA == 0x1 && cbB == 0x4) {
       if (_view->_diamonds.find((Diamond*)contact->GetFixtureB()->GetUserData()) == _view->_diamonds.end()) {
 	std::cout << "diamond not found" << std::endl;

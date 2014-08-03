@@ -27,6 +27,7 @@ EnemyShip::EnemyShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView
   _pi = _scene->addPolygon(polygon, p);
   _pi->setData(0, QVariant::fromValue((void *)_body));
   _pi->setPos(_body->GetPosition().x, _body->GetPosition().y);
+  _pi->setBrush(QBrush(Qt::red, Qt::SolidPattern));
 
   b2Vec2 force((float)qrand()/RAND_MAX, (float)qrand()/RAND_MAX);
   _body->ApplyForceToCenter(force, true);

@@ -26,6 +26,7 @@ PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsVi
   _pi = _scene->addPolygon(polygon, p);
   _pi->setData(0, QVariant::fromValue((void *)_body));
   _pi->setPos(_body->GetPosition().x, _body->GetPosition().y);
+  _pi->setBrush(QBrush(Qt::white, Qt::SolidPattern));
 
   ts.start();
 }
@@ -69,7 +70,8 @@ void PlayerShip::update() {
   // Would prefer to implement centering logic in QWorldView
   _view->centerOn(_pi->x(), _view->height()/2);
 
-
+#ifdef __ANDROID_API__
    b2Vec2 tilt(ts.reading()->xRotation()/360. * 10., -ts.reading()->yRotation()/360.);
   _body->ApplyForceToCenter(tilt, true);
+#endif
 }

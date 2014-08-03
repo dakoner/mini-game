@@ -8,8 +8,9 @@ Diamond::Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* vi
   polyshape->Set(ship_crds.data(), ship_crds.size());
 
 
-  qreal x = 5;
-  qreal y = 5;
+  qreal x = (float)qrand()/RAND_MAX*40;
+  qreal y = (float)qrand()/RAND_MAX*10;
+
   _body = engine->createBody(b2_dynamicBody, x, y, 0, false);
   _body->SetFixedRotation(true);
   b2Fixture* fixture = engine->createFixture(_body, polyshape);
@@ -31,6 +32,8 @@ Diamond::Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* vi
   _pi = _scene->addPolygon(polygon, p);
   _pi->setData(0, QVariant::fromValue((void *)_body));
   _pi->setPos(_body->GetPosition().x, _body->GetPosition().y);
+  _pi->setBrush(QBrush(Qt::yellow, Qt::SolidPattern));
+
   connect(_engine, SIGNAL(step()), this, SLOT(update()));
 }
 void Diamond::update() {
