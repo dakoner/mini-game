@@ -27,11 +27,11 @@ QWorldView::QWorldView(QtBox2DEngine* engine, QWidget *parent) :
 
   _player_ship = new PlayerShip(_scene, engine, this);
   for (int i = 0; i < 3; ++i) {
-    _enemy_ships.insert(new EnemyShip(_scene, engine, this));
+    _items.insert(new EnemyShip(_scene, engine, this));
   }
   _world = new World(_scene, engine, this);
   for (int i = 0; i < 30; ++i) {
-    _diamonds.insert(new Diamond(_scene, engine, this));
+    _items.insert(new Diamond(_scene, engine, this));
   }
 
   // Detect user/scene input

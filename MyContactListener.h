@@ -13,21 +13,28 @@ public:
   void BeginContact(b2Contact* contact) {
     uint16 cbA = contact->GetFixtureA()->GetFilterData().categoryBits;
     uint16 cbB = contact->GetFixtureB()->GetFilterData().categoryBits;
-    // Ship<->diamond collision
+    // PlayerShip<->diamond collision
     if (cbA == 0x1 && cbB == 0x4) {
       _fixtures_to_destroy.insert(contact->GetFixtureB());
     }
     if (cbA == 0x4 && cbB == 0x1) {
       _fixtures_to_destroy.insert(contact->GetFixtureA());
     }
+    // EnemyShip<->diamond collision
+    if (cbA == 0x2 && cbB == 0x4) {
+      _fixtures_to_destroy.insert(contact->GetFixtureA());
+    }
+    if (cbA == 0x4 && cbB == 0x2) {
+      _fixtures_to_destroy.insert(contact->GetFixtureB());
+    }
   }
 private slots:
   void update() {
-    for(auto& item : _fixtures_to_destroy) {
-      Diamond*  d = (Diamond*)item->GetUserData();
-      _view->_diamonds.erase(d);
-      delete d;
-      item->GetBody()->DestroyFixture(item);
+    for(auto& fixture : _fixtures_to_destroy) {
+      Item* i = (Item*)fixture->GetUserData();
+      _view->_items.erase(i);
+      delete i;
+      _engine->destroyBody(fixture->GetBody());
     }
     _fixtures_to_destroy.clear();
   }

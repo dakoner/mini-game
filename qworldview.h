@@ -17,8 +17,7 @@ class QWorldView : public QGraphicsView, public b2ContactListener
 
 public:
   explicit QWorldView(QtBox2DEngine* engine, QWidget *parent = 0);
-  std::set<EnemyShip* > _enemy_ships;
-  std::set<Diamond* > _diamonds;
+  std::set<Item* > _items;
 
 private:
   QtBox2DEngine *_engine;
