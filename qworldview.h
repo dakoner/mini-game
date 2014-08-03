@@ -16,13 +16,10 @@ class QWorldView : public QGraphicsView, public b2ContactListener
     Q_OBJECT
 
 public:
-  explicit QWorldView(QtBox2DEngine* engine, QWidget *parent = 0);
+  explicit QWorldView(QWidget *parent = 0);
   std::set<Item* > _items;
 
 private:
-  QtBox2DEngine *_engine;
-  QGraphicsScene *_scene;
-  PlayerShip* _player_ship;
   World* _world;
 };
 

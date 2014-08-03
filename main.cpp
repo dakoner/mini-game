@@ -1,20 +1,17 @@
 #include "qworldview.h"
 #include <QApplication>
+#include <QGraphicsScene>
 #include "box2dengine.h"
+#include "World.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     a.setAttribute(Qt::AA_SynthesizeMouseForUnhandledTouchEvents, true);
 
-  QtBox2DEngine engine;
-  engine.setGravity(0);
-  engine.setInterval(60);
-
-  QWorldView w(&engine);
+    QWorldView w;
     w.show();
-
-  engine.start();
+    
 
     return a.exec();
 }

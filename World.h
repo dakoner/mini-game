@@ -9,23 +9,20 @@
 #include <QPointF>
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <QGraphicsPolygonItem>
+#include <QGraphicsItem>
+#include "Item.h"
 
 #include "Box2D/Box2D.h"
 #include "box2dengine.h"
 
-class World: public QObject
+class World: public Item
 {
   Q_OBJECT
 
 public:
   World(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
-
-
-protected:
-  QGraphicsScene* _scene;
-  QtBox2DEngine* _engine;
-  QGraphicsView* _view;
+  void addLine(double x1, double y1, double x2, double y2, QList<QGraphicsItem*>* items);
+  void addChain(const QList<QPointF>& points, QList<QGraphicsItem*>* items);
 };
 
 #endif

@@ -3,8 +3,9 @@ Item::Item(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): _
   connect(_engine, &QtBox2DEngine::step, this, &Item::updatePosition);
 }
 
-b2Body* Item::Body() { return _body; }
-QGraphicsItem* Item::GraphicsItem() { return _it; }
+QGraphicsView* Item::GetView() { return _view; }
+b2Body* Item::GetBody() { return _body; }
+QGraphicsItem* Item::GetGraphicsItem() { return _it; }
 
 bool Item::eventFilter(QObject *obj, QEvent *event) {
   // standard event processing

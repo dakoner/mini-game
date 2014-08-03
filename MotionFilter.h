@@ -12,36 +12,36 @@
 #include <QtWidgets/QScrollBar>
 #include <set>
 #include "box2dengine.h"
-#include "Ship.h"
+#include "PlayerShip.h"
 
 // Would prefer to not require this class at all, but it seems
 // required for handling scene-level mouse and touch events properly.
 
 class SceneMotionFilter : public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
 
-public:
-    SceneMotionFilter(Ship *ship):
-        _ship(ship) { }
+  public:
+  SceneMotionFilter(PlayerShip *ship):
+  _ship(ship) { }
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) {
-        if (event->type() == QEvent::GraphicsSceneMouseMove) {
-            QGraphicsSceneMouseEvent *mouseEvent = static_cast<QGraphicsSceneMouseEvent *>(event);
-            QPointF pos = mouseEvent->scenePos();
-            b2Vec2 sp = _ship->Body()->GetPosition();
-            b2Vec2 mp(pos.x(), pos.y());
-            mp -= sp;
-            mp *= 0.02;
-            _ship->Body()->ApplyForceToCenter(mp, true);
-            return true;
-        }
-        return QObject::eventFilter(obj, event);
+  bool eventFilter(QObject *obj, QEvent *event) {
+    if (event->type() == QEvent::GraphicsSceneMouseMove) {
+      QGraphicsSceneMouseEvent *mouseEvent = static_cast<QGraphicsSceneMouseEvent *>(event);
+      QPointF pos = mouseEvent->scenePos();
+      b2Vec2 sp = _ship->GetBody()->GetPosition();
+      b2Vec2 mp(pos.x(), pos.y());
+      mp -= sp;
+      mp *= 0.02;
+      _ship->GetBody()->ApplyForceToCenter(mp, true);
+      return true;
     }
+    return QObject::eventFilter(obj, event);
+  }
 
 private:
-    Ship* _ship;
+  PlayerShip* _ship;
 };
 
 #endif // MOTIONFILTER_H

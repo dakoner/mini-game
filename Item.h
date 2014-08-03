@@ -24,8 +24,9 @@ public:
     _scene->removeItem(_it);
     delete _it;
   }
-  b2Body* Body();
-  QGraphicsItem* GraphicsItem();
+  QGraphicsView* GetView();
+  b2Body* GetBody();
+  QGraphicsItem* GetGraphicsItem();
 
   virtual bool eventFilter(QObject *obj, QEvent *event);
 
