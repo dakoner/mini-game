@@ -19,7 +19,9 @@ public:
   bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
-  void update();
+  void updatePosition();
+  void updateDrag();
+  void updateTilt();
 
 private:
   QGraphicsPolygonItem* _pi;

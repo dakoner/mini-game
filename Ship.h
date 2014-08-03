@@ -25,7 +25,10 @@ public:
   virtual bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
-  virtual void update() = 0;
+  // Currently pure virtual, but if we kept a pointer to the
+  // QGraphicsItem created by subclasses, we could put the position
+  // update in the base class
+  virtual void updatePosition() = 0;
 
 protected:
   b2Body* _body;

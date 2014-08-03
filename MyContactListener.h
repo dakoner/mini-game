@@ -13,13 +13,12 @@ public:
   void BeginContact(b2Contact* contact) {
     uint16 cbA = contact->GetFixtureA()->GetFilterData().categoryBits;
     uint16 cbB = contact->GetFixtureB()->GetFilterData().categoryBits;
-    std::cout << cbA << " " << cbB << std::endl;
+    // Ship<->diamond collision
     if (cbA == 0x1 && cbB == 0x4) {
-      if (_view->_diamonds.find((Diamond*)contact->GetFixtureB()->GetUserData()) == _view->_diamonds.end()) {
-	std::cout << "diamond not found" << std::endl;
-      } else {
-	_fixtures_to_destroy.insert(contact->GetFixtureB());
-      }
+      _fixtures_to_destroy.insert(contact->GetFixtureB());
+    }
+    if (cbA == 0x4 && cbB == 0x1) {
+      _fixtures_to_destroy.insert(contact->GetFixtureA());
     }
   }
 private slots:

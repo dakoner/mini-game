@@ -16,7 +16,7 @@ public:
   b2Body* Body();
 
 private slots:
-  void update();
+  void updatePosition();
 
 private:
   QGraphicsPolygonItem* _pi;

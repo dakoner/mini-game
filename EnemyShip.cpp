@@ -31,8 +31,10 @@ EnemyShip::EnemyShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView
 
   b2Vec2 force((float)qrand()/RAND_MAX, (float)qrand()/RAND_MAX);
   _body->ApplyForceToCenter(force, true);
+
+  connect(_engine, &QtBox2DEngine::step, this, &EnemyShip::updatePosition);
 }
 
-void EnemyShip::update() {
+void EnemyShip::updatePosition() {
   _pi->setPos(_body->GetPosition().x, _body->GetPosition().y);
 }

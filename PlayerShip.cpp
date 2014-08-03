@@ -28,7 +28,13 @@ PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsVi
   _pi->setPos(_body->GetPosition().x, _body->GetPosition().y);
   _pi->setBrush(QBrush(Qt::white, Qt::SolidPattern));
 
+
+  connect(_engine, &QtBox2DEngine::step, this, &PlayerShip::updatePosition);
+  connect(_engine, &QtBox2DEngine::step, this, &PlayerShip::updateDrag);
+#ifdef __ANDROID_API__
   ts.start();
+  connect(_engine, &QtBox2DEngine::step, this, &PlayerShip::updateTitle);
+#endif
 }
 
 bool PlayerShip::eventFilter(QObject *obj, QEvent *event) {
@@ -55,7 +61,14 @@ bool PlayerShip::eventFilter(QObject *obj, QEvent *event) {
   return true;
 }
 
-void PlayerShip::update() {
+void PlayerShip::updatePosition() {
+  _pi->setPos(_body->GetPosition().x, _body->GetPosition().y);
+  // Would prefer to implement centering logic in QWorldView
+  _view->centerOn(_pi->x(), _view->height()/2);
+}
+
+void PlayerShip::updateDrag() {
+
   // Apply drag
   // drag coefficient
   float Cd = 0.05f;
@@ -65,13 +78,9 @@ void PlayerShip::update() {
   float dragAngle = atan2f(lv.y, lv.x) + M_PI/2.f;
   b2Vec2 appliedDrag(-sinf(dragAngle)*dragForce, 0.);
   _body->ApplyForceToCenter(appliedDrag, true);
+}
 
-  _pi->setPos(_body->GetPosition().x, _body->GetPosition().y);
-  // Would prefer to implement centering logic in QWorldView
-  _view->centerOn(_pi->x(), _view->height()/2);
-
-#ifdef __ANDROID_API__
+void PlayerShip::updateTilt() {
    b2Vec2 tilt(ts.reading()->xRotation()/360. * 10., -ts.reading()->yRotation()/360.);
   _body->ApplyForceToCenter(tilt, true);
-#endif
 }
