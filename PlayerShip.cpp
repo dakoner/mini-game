@@ -22,12 +22,11 @@ PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsVi
   }
   QPolygonF polygon(polygon_crds);
   QPen p(Qt::white);
+  QBrush br(Qt::white, Qt::SolidPattern);
   p.setWidth(0);
-  _it = _scene->addPolygon(polygon, p);
+  _it = _scene->addPolygon(polygon, p, br);
   _it->setData(0, QVariant::fromValue((void *)_body));
   _it->setPos(_body->GetPosition().x, _body->GetPosition().y);
-  ((QGraphicsPolygonItem *)_it)->setBrush(QBrush(Qt::white, Qt::SolidPattern));
-
 
   connect(_engine, &QtBox2DEngine::step, this, &PlayerShip::centerView);
   connect(_engine, &QtBox2DEngine::step, this, &PlayerShip::updateDrag);

@@ -23,11 +23,11 @@ EnemyShip::EnemyShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView
   }
   QPolygonF polygon(polygon_crds);
   QPen p(Qt::white);
+  QBrush br(Qt::red, Qt::SolidPattern);
   p.setWidth(0);
-  _it = _scene->addPolygon(polygon, p);
+  _it = _scene->addPolygon(polygon, p, br);
   _it->setData(0, QVariant::fromValue((void *)_body));
   _it->setPos(_body->GetPosition().x, _body->GetPosition().y);
-  ((QGraphicsPolygonItem *)_it)->setBrush(QBrush(Qt::red, Qt::SolidPattern));
 
   b2Vec2 force((float)qrand()/RAND_MAX, (float)qrand()/RAND_MAX);
   _body->ApplyForceToCenter(force, true);

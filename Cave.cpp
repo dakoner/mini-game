@@ -1,4 +1,4 @@
-#include <QList>
+#include <QPolygonF>
 #include <QGraphicsItemGroup>
 #include <iostream>
 #include "Cave.h"
@@ -9,27 +9,21 @@ std::vector<int> stalagmites{0,0,0,0,2,2,2,2,2,3,3,4,4,3,0,0,0,0,0,1,0,0,0,0,1,1
 Cave::Cave(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): Item(scene, engine, view) {
   _body = _engine->createBody(b2_staticBody, 0, 0, 0, false);
   QList<QGraphicsItem*> items;
-  QList<QPointF> points;
+  QPolygonF points;
 
   for (unsigned int i = 0; i < stalagtites.size(); ++i)
     points.push_back(QPointF(i,stalagtites[i]));
-  for (int i = stalagmites.size(); i > 0; --i)
+  // Add stalagmites in reverse order to maintain polygon winding.
+  for (unsigned int i = stalagmites.size(); i > 0; --i)
     points.push_back(QPointF(i-1,10-stalagmites[i-1]));
   // Add the first point, so we create a loop
   points.push_back(QPointF(0,stalagtites[0]));
-  addChain(points, &items);
-  _it = _scene->createItemGroup(items);
-}
-
-
-void Cave::addChain(const QList<QPointF>& points, QList<QGraphicsItem*>* items) {
   QPen p(Qt::white);
   p.setWidth(0);
+  _it = _scene->addPolygon(points, p);
 
   b2Vec2* vertices = new b2Vec2[points.size()];
-  for (int i=0; i < points.size(); ++i) {
-    if (i != points.size()-1)
-      items->append(_scene->addLine(points[i].x(), points[i].y(), points[i+1].x(), points[i+1].y(), p));
+  for (int i=0; i < points.size()-1; ++i) {
     vertices[i] = b2Vec2(points[i].x(), points[i].y());
   }
 
@@ -42,4 +36,5 @@ void Cave::addChain(const QList<QPointF>& points, QList<QGraphicsItem*>* items) 
   b.categoryBits = 0x8;
   b.maskBits = 0xffff;
   fixture->SetFilterData(b);
+
 }

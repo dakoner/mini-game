@@ -21,7 +21,6 @@ class Cave: public Item
 
 public:
   Cave(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
-  void addChain(const QList<QPointF>& points, QList<QGraphicsItem*>* items);
 };
 
 #endif
