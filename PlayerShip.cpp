@@ -1,5 +1,6 @@
 #include "PlayerShip.h"
 
+// TODO(dek): can the declarative code be put in initializer list, then handled automagically by base class code?
 PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): Ship(scene, engine, view) {
   QPolygonF polygon({ {0, 0}, {.1, .1}, {0.2,0.025}, {.3333,.1}, {.3333,.2}, {.2,.275}, {.1,.2}, {0,.3333} });
   QPen p(Qt::white);
