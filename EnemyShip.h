@@ -1,9 +1,9 @@
 #ifndef _ENEMY_SHIP_H_
 #define _ENEMY_SHIP_H_
 
-#include "Ship.h"
+#include "PolygonItem.h"
 
-class EnemyShip: public Ship
+class EnemyShip: public PolygonItem
 {
   Q_OBJECT
 

@@ -1,9 +1,9 @@
 #ifndef _DIAMOND_H_
 #define _DIAMOND_H_
 
-#include "Item.h"
+#include "PolygonItem.h"
 
-class Diamond: public Item
+class Diamond: public PolygonItem
 {
   Q_OBJECT
 

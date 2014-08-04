@@ -1,10 +1,10 @@
 #ifndef _PLAYER_SHIP_H_
 #define _PLAYER_SHIP_H_
 
-#include "Ship.h"
+#include "PolygonItem.h"
 #include "QtSensors/QTiltSensor"
 
-class PlayerShip: public Ship
+class PlayerShip: public PolygonItem
 {
   Q_OBJECT
 

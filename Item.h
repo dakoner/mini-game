@@ -21,8 +21,8 @@ class Item: public QObject
 public:
   Item(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
   ~Item() {
-    _scene->removeItem(_it);
-    delete _it;
+    if (_it.get() != nullptr)
+      _scene->removeItem(_it.get());
   }
   QGraphicsView* GetView();
   b2Body* GetBody();
@@ -38,7 +38,7 @@ protected:
   QtBox2DEngine* _engine;
   QGraphicsView* _view;
   b2Body* _body;
-  QGraphicsItem* _it;
+  std::unique_ptr<QGraphicsItem> _it;
 };
 
 #endif

@@ -17,22 +17,22 @@ TEMPLATE = app
 SOURCES += \
     box2dengine.cpp \
     main.cpp \
-    Ship.cpp \
     PlayerShip.cpp \
     EnemyShip.cpp \
     Cave.cpp \
     Diamond.cpp \
+    PolygonItem.cpp \
     Item.cpp
 
 HEADERS  += \
     box2dengine.h \
     MotionFilter.h \
-    Ship.h \
     PlayerShip.h \
     EnemyShip.h \
     Cave.h \
     Diamond.h \
     MyContactListener.h \
+    PolygonItem.h \
     Item.h
 
 

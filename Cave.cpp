@@ -20,7 +20,7 @@ Cave::Cave(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): I
   points.push_back(QPointF(0,stalagtites[0]));
   QPen p(Qt::white);
   p.setWidth(0);
-  _it = _scene->addPolygon(points, p);
+  _it.reset(_scene->addPolygon(points, p));
 
   std::vector<b2Vec2> vertices;
   for (auto item : points) {

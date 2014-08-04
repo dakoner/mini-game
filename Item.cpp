@@ -1,11 +1,15 @@
+#include <iostream>
 #include "Item.h"
-Item::Item(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): _scene(scene), _engine(engine), _view(view) {
+
+Item::Item(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): _scene(scene),
+									       _engine(engine), 
+									       _view(view) {
   connect(_engine, &QtBox2DEngine::step, this, &Item::updatePosition);
 }
 
 QGraphicsView* Item::GetView() { return _view; }
 b2Body* Item::GetBody() { return _body; }
-QGraphicsItem* Item::GetGraphicsItem() { return _it; }
+QGraphicsItem* Item::GetGraphicsItem() { return _it.get(); }
 
 bool Item::eventFilter(QObject *obj, QEvent *event) {
   // standard event processing
@@ -13,5 +17,8 @@ bool Item::eventFilter(QObject *obj, QEvent *event) {
 }
 
 void Item::updatePosition() {
-  _it->setPos(_body->GetPosition().x, _body->GetPosition().y);
+  if (!_it.get()) {
+    std::cerr << "updatePosition called on invalid item." << std::endl;
+  } else 
+    _it->setPos(_body->GetPosition().x, _body->GetPosition().y);
 }
