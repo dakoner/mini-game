@@ -1,4 +1,5 @@
 #include "PlayerShip.h"
+#include "MotionFilter.h"
 
 // TODO(dek): can the declarative code be put in initializer list, then handled automagically by base class code?
 PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): 
@@ -9,6 +10,12 @@ PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsVi
 	      QPointF(2.,5.),
 	      0x1, 0xffff,
 	      scene, engine, view) {
+
+  // Detect user/scene input
+  SceneMotionFilter* scene_motion_filter = new SceneMotionFilter(this);
+  // scene event filter required to get mouse events
+  _scene->installEventFilter(scene_motion_filter);
+  _view->installEventFilter(this);
 
   connect(engine, &QtBox2DEngine::step, this, &PlayerShip::centerView);
   connect(engine, &QtBox2DEngine::step, this, &PlayerShip::updateDrag);

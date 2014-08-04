@@ -6,7 +6,6 @@
 #include "PlayerShip.h"
 #include "EnemyShip.h"
 #include "MyContactListener.h"
-#include "MotionFilter.h"
 
 const float view_scale = 108.;
 
@@ -38,11 +37,6 @@ int main(int argc, char *argv[])
     new Diamond(scene, engine, view);
   }
 
-  // Detect user/scene input
-  SceneMotionFilter* scene_motion_filter = new SceneMotionFilter(player_ship);
-  // scene event filter required to get mouse events
-  scene->installEventFilter(scene_motion_filter);
-  view->installEventFilter(player_ship);
 
   MyContactListener* myContactListenerInstance = new MyContactListener(engine, view);
   engine->setContactListener(myContactListenerInstance);
