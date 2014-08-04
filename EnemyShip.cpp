@@ -2,12 +2,23 @@
 #include "qglobal.h"
 
 EnemyShip::EnemyShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): Ship(scene, engine, view) {
-  std::vector<b2Vec2> ship_crds = { { 1./10., 0. }, {3./10., 0.}, {4./10.,1./10.}, {3./10.,2./10.}, {1./10.,2./10.}, {0.,1./10.} };
+  QPolygonF polygon({ { 1./10., 0. }, {3./10., 0.}, {4./10.,1./10.}, {3./10.,2./10.}, {1./10.,2./10.}, {0.,1./10.} });
+  QPen p(Qt::white);
+  QBrush br(Qt::red, Qt::SolidPattern);
+  p.setWidth(0);
+  _it = _scene->addPolygon(polygon, p, br);
+
+  std::vector<b2Vec2> ship_crds;
+  for (auto item : polygon) {
+    ship_crds.push_back(b2Vec2(item.x(), item.y()));
+  }
+
   b2PolygonShape* polyshape = new b2PolygonShape;
   polyshape->Set(ship_crds.data(), ship_crds.size());
 
   _body = engine->createBody(b2_dynamicBody, (float)qrand()/RAND_MAX*40, (float)qrand()/RAND_MAX*10, 0, false);
   _body->SetFixedRotation(true);
+
   b2Fixture* fixture = engine->createFixture(_body, polyshape);
   fixture->SetRestitution(1);
   fixture->SetFriction(0);
@@ -17,17 +28,6 @@ EnemyShip::EnemyShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView
   fixture->SetFilterData(b);
   fixture->SetUserData(this);
 
-  QVector<QPointF> polygon_crds;
-  for(auto& item : ship_crds) {
-    polygon_crds.push_back(QPointF(item.x, item.y));
-  }
-  QPolygonF polygon(polygon_crds);
-  QPen p(Qt::white);
-  QBrush br(Qt::red, Qt::SolidPattern);
-  p.setWidth(0);
-  _it = _scene->addPolygon(polygon, p, br);
-  _it->setData(0, QVariant::fromValue((void *)_body));
-  _it->setPos(_body->GetPosition().x, _body->GetPosition().y);
 
   b2Vec2 force((float)qrand()/RAND_MAX, (float)qrand()/RAND_MAX);
   _body->ApplyForceToCenter(force, true);

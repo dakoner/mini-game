@@ -22,13 +22,13 @@ Cave::Cave(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): I
   p.setWidth(0);
   _it = _scene->addPolygon(points, p);
 
-  b2Vec2* vertices = new b2Vec2[points.size()];
-  for (int i=0; i < points.size()-1; ++i) {
-    vertices[i] = b2Vec2(points[i].x(), points[i].y());
+  std::vector<b2Vec2> vertices;
+  for (auto item : points) {
+    vertices.push_back(b2Vec2(item.x(), item.y()));
   }
 
   b2ChainShape *chain = new b2ChainShape;
-  chain->CreateChain(vertices, points.size());
+  chain->CreateChain(vertices.data(), vertices.size());
   b2Fixture* fixture = _engine->createFixture(_body, chain);\
   fixture->SetRestitution(1);
   fixture->SetFriction(0);

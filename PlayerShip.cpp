@@ -1,12 +1,22 @@
 #include "PlayerShip.h"
 
 PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): Ship(scene, engine, view) {
-  std::vector<b2Vec2> ship_crds = { {0, 0}, {.1, .1}, {0.2,0.025}, {.3333,.1}, {.3333,.2}, {.2,.275}, {.1,.2}, {0,.3333} };
+  QPolygonF polygon({ {0, 0}, {.1, .1}, {0.2,0.025}, {.3333,.1}, {.3333,.2}, {.2,.275}, {.1,.2}, {0,.3333} });
+  QPen p(Qt::white);
+  QBrush br(Qt::white, Qt::SolidPattern);
+  p.setWidth(0);
+  _it = _scene->addPolygon(polygon, p, br);
+
+  std::vector<b2Vec2> ship_crds;
+  for (auto item : polygon) {
+    ship_crds.push_back(b2Vec2(item.x(), item.y()));
+  }
   b2PolygonShape* polyshape = new b2PolygonShape;
   polyshape->Set(ship_crds.data(), ship_crds.size());
 
   _body = engine->createBody(b2_dynamicBody, 2, 5, 0, false);
   _body->SetFixedRotation(true);
+
   b2Fixture* fixture = engine->createFixture(_body, polyshape);
   fixture->SetRestitution(1);
   fixture->SetFriction(0);
@@ -15,18 +25,6 @@ PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsVi
   b.maskBits = 0xffff;
   fixture->SetFilterData(b);
   fixture->SetUserData(this);
-
-  QVector<QPointF> polygon_crds;
-  for(auto& item : ship_crds) {
-    polygon_crds.push_back(QPointF(item.x, item.y));
-  }
-  QPolygonF polygon(polygon_crds);
-  QPen p(Qt::white);
-  QBrush br(Qt::white, Qt::SolidPattern);
-  p.setWidth(0);
-  _it = _scene->addPolygon(polygon, p, br);
-  _it->setData(0, QVariant::fromValue((void *)_body));
-  _it->setPos(_body->GetPosition().x, _body->GetPosition().y);
 
   connect(_engine, &QtBox2DEngine::step, this, &PlayerShip::centerView);
   connect(_engine, &QtBox2DEngine::step, this, &PlayerShip::updateDrag);
