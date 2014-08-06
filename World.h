@@ -1,4 +1,5 @@
 #include <QGraphicsScene>
+#include <QEvent>
 #include <QGraphicsView>
 #include "box2dengine.h"
 #include "Cave.h"
@@ -7,6 +8,7 @@
 #include "Diamond.h"
 #include "MyContactListener.h"
 #include <QObject>
+#include "QtSensors/QTiltSensor"
 
 class World: public QObject {
   Q_OBJECT
@@ -15,6 +17,10 @@ public:
 	QGraphicsView* _view);
   void Start();
   void centerViewOnPlayer();
+  bool eventFilter(QObject *obj, QEvent *event);
+private slots:
+  void updateDrag();
+  void updateTilt();
 private:
   QGraphicsScene* _scene;
   QGraphicsView* _view;
@@ -22,4 +28,6 @@ private:
   MyContactListener* _myContactListener;
   Cave* _cave;
   PlayerShip* _player_ship;
+private:
+  QTiltSensor ts;
 };
