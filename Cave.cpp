@@ -29,7 +29,7 @@ Cave::Cave(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): I
 
   b2ChainShape *chain = new b2ChainShape;
   chain->CreateChain(vertices.data(), vertices.size());
-  b2Fixture* fixture = _engine->createFixture(_body, chain);\
+  b2Fixture* fixture = _engine->createFixture(_body, chain);
   fixture->SetRestitution(1);
   fixture->SetFriction(0);
   b2Filter b;
