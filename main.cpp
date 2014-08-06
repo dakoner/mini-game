@@ -32,11 +32,11 @@ int main(int argc, char *argv[])
 
   Cave* cave = new Cave(scene, engine, view);
   PlayerShip* player_ship = new PlayerShip(scene, engine, view);
-  for (int i = 0; i < 3; ++i) {
-    new EnemyShip(scene, engine, view);
+  for (int i = 0; i < 10; ++i) {
+    new EnemyShip(scene, engine, view, cave);
   }
   for (int i = 0; i < 30; ++i) {
-    new Diamond(scene, engine, view);
+    new Diamond(scene, engine, view, cave);
   }
 
 
