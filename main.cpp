@@ -18,12 +18,14 @@ int main(int argc, char *argv[])
 
   QGraphicsView* view = new QGraphicsView(scene);
   view->setMouseTracking(true);
-  view->resize(1920,1080);
+  // view->resize(1920,1080);
   view->scale(view_scale, view_scale);
   view->setBackgroundBrush(QBrush(Qt::black, Qt::SolidPattern));
   view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  view->show();
+  view->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+  view->setFrameStyle(0);
+  view->showFullScreen();
     
 
   QtBox2DEngine* engine = new QtBox2DEngine;
