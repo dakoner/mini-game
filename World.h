@@ -6,12 +6,15 @@
 #include "EnemyShip.h"
 #include "Diamond.h"
 #include "MyContactListener.h"
+#include <QObject>
 
-class World {
+class World: public QObject {
+  Q_OBJECT
 public:
   World(QGraphicsScene* _scene,
 	QGraphicsView* _view);
   void Start();
+  void centerViewOnPlayer();
 private:
   QGraphicsScene* _scene;
   QGraphicsView* _view;

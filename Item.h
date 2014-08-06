@@ -8,7 +8,6 @@
 #include <QVector>
 #include <QPointF>
 #include <QGraphicsScene>
-#include <QGraphicsView>
 #include <QGraphicsItem>
 
 #include "Box2D/Box2D.h"
@@ -19,12 +18,11 @@ class Item: public QObject
   Q_OBJECT
 
 public:
-  Item(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
+  Item(QGraphicsScene* scene, QtBox2DEngine* engine);
   ~Item() {
     if (_it.get() != nullptr)
       _scene->removeItem(_it.get());
   }
-  QGraphicsView* GetView();
   b2Body* GetBody();
   QGraphicsItem* GetGraphicsItem();
 
@@ -36,7 +34,6 @@ private slots:
 protected:
   QGraphicsScene* _scene;
   QtBox2DEngine* _engine;
-  QGraphicsView* _view;
   b2Body* _body;
   std::unique_ptr<QGraphicsItem> _it;
 };

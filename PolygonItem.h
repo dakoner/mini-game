@@ -8,7 +8,6 @@
 #include <QVector>
 #include <QPointF>
 #include <QGraphicsScene>
-#include <QGraphicsView>
 #include <QGraphicsItem>
 
 #include "Box2D/Box2D.h"
@@ -20,7 +19,7 @@ class PolygonItem: public Item
   Q_OBJECT
 
 public:
-  PolygonItem(QPolygonF polygon, QPen p, QBrush br, QPointF point, uint16 categoryBits, uint16 maskBits, QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
+  PolygonItem(QPolygonF polygon, QPen p, QBrush br, QPointF point, uint16 categoryBits, uint16 maskBits, QGraphicsScene* scene, QtBox2DEngine* engine);
 protected:
   b2PolygonShape* _polyshape;
   b2Fixture* _fixture;

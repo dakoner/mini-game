@@ -9,7 +9,7 @@ class EnemyShip: public PolygonItem
   Q_OBJECT
 
 public:
-  EnemyShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view, Cave* cave);
+  EnemyShip(QGraphicsScene* scene, QtBox2DEngine* engine, Cave* cave);
 };
 
 #endif

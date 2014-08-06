@@ -1,13 +1,11 @@
 #include <iostream>
 #include "Item.h"
 
-Item::Item(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): _scene(scene),
-									       _engine(engine), 
-									       _view(view) {
+Item::Item(QGraphicsScene* scene, QtBox2DEngine* engine): _scene(scene),
+							  _engine(engine) {
   connect(_engine, &QtBox2DEngine::step, this, &Item::updatePosition);
 }
 
-QGraphicsView* Item::GetView() { return _view; }
 b2Body* Item::GetBody() { return _body; }
 QGraphicsItem* Item::GetGraphicsItem() { return _it.get(); }
 

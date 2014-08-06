@@ -1,6 +1,6 @@
 #include "PolygonItem.h"
 
-PolygonItem::PolygonItem(QPolygonF polygon, QPen p, QBrush br, QPointF point, uint16 categoryBits, uint16 maskBits, QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): Item(scene, engine, view) {
+PolygonItem::PolygonItem(QPolygonF polygon, QPen p, QBrush br, QPointF point, uint16 categoryBits, uint16 maskBits, QGraphicsScene* scene, QtBox2DEngine* engine): Item(scene, engine) {
   p.setWidth(0);
   _it.reset(scene->addPolygon(polygon, p, br));
   std::vector<b2Vec2> ship_crds;

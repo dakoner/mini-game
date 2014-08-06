@@ -21,7 +21,7 @@ class Cave: public Item
   Q_OBJECT
 
 public:
-  Cave(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
+  Cave(QGraphicsScene* scene, QtBox2DEngine* engine);
 
   bool isBelowStalagtite(float x, float y);
   bool isAboveStalagmite(float x, float y);

@@ -9,7 +9,7 @@ class Diamond: public PolygonItem
   Q_OBJECT
 
 public:
-  Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view, Cave* cave);
+  Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, Cave* cave);
 };
 
 #endif

@@ -1,23 +1,22 @@
 #include "PlayerShip.h"
 #include "MotionFilter.h"
 
-// TODO(dek): can the declarative code be put in initializer list, then handled automagically by base class code?
-PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view): 
+// TODO(dek): can all the "view" related code go into a non-PlayerShip class?
+
+PlayerShip::PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine): 
   PolygonItem(
 	      QPolygonF({ {0, 0}, {.1, .1}, {0.2,0.025}, {.3333,.1}, {.3333,.2}, {.2,.275}, {.1,.2}, {0,.3333} }), 
 	      QPen(Qt::white),
 	      QBrush(Qt::white, Qt::SolidPattern),
 	      QPointF(2.,5.),
 	      0x1, 0xffff,
-	      scene, engine, view) {
+	      scene, engine) {
 
   // Detect user/scene input
   SceneMotionFilter* scene_motion_filter = new SceneMotionFilter(this);
   // scene event filter required to get mouse events
   _scene->installEventFilter(scene_motion_filter);
-  _view->installEventFilter(this);
 
-  connect(engine, &QtBox2DEngine::step, this, &PlayerShip::centerView);
   connect(engine, &QtBox2DEngine::step, this, &PlayerShip::updateDrag);
 #ifdef __ANDROID_API__
   ts.start();
@@ -49,9 +48,6 @@ bool PlayerShip::eventFilter(QObject *obj, QEvent *event) {
   return true;
 }
 
-void PlayerShip::centerView() {
-  _view->centerOn(_it->x(), _view->height()/2);
-}
 
 void PlayerShip::updateDrag() {
 

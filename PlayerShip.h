@@ -9,11 +9,10 @@ class PlayerShip: public PolygonItem
   Q_OBJECT
 
 public:
-  PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view);
+  PlayerShip(QGraphicsScene* scene, QtBox2DEngine* engine);
   virtual bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
-  void centerView();
   void updateDrag();
   void updateTilt();
 

@@ -6,14 +6,14 @@
 #include "Box2D/Box2D.h"
 
 
-Diamond::Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, QGraphicsView* view, Cave* cave):
+Diamond::Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, Cave* cave):
   PolygonItem::PolygonItem(
 			   QPolygonF({ {0, 0},{.1,-.1},{.2,0,},{.1,.1} }),
 			   QPen(Qt::white),
 			   QBrush(Qt::yellow, Qt::SolidPattern),
 			   QPointF(0,0),
 			   0x4, 0xffff,
-			   scene, engine, view) {
+			   scene, engine) {
  while (true) {
    float x = (float)qrand()/RAND_MAX*40.;
    float y = (float)qrand()/RAND_MAX*10.;
