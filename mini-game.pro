@@ -22,7 +22,8 @@ SOURCES += \
     Cave.cpp \
     Diamond.cpp \
     PolygonItem.cpp \
-    Item.cpp
+    Item.cpp \
+    World.cpp
 
 HEADERS  += \
     box2dengine.h \
@@ -33,7 +34,8 @@ HEADERS  += \
     Diamond.h \
     MyContactListener.h \
     PolygonItem.h \
-    Item.h
+    Item.h \
+    World.h
 
 
 FORMS    += 
