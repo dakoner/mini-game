@@ -40,6 +40,17 @@ Cave::Cave(QGraphicsScene* scene, QtBox2DEngine* engine):
 
   }
 
+b2Vec2 Cave::GeneratePointInside() {
+  // make this code a method of Cave?
+  while (true) {
+    float x = (float)qrand()/RAND_MAX*40.;
+    float y = (float)qrand()/RAND_MAX*10.;
+    if (isBelowStalagtite(x, y) && isAboveStalagmite(x, y)) {
+      return b2Vec2(x, y);
+    }
+  }
+}
+
 bool Cave::isBelowStalagtite(float x, float y) {
   
   int x_index = floor(x);

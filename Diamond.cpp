@@ -14,12 +14,5 @@ Diamond::Diamond(QGraphicsScene* scene, QtBox2DEngine* engine, Cave* cave):
 			   QPointF(0,0),
 			   0x4, 0xffff,
 			   scene, engine) {
- while (true) {
-   float x = (float)qrand()/RAND_MAX*40.;
-   float y = (float)qrand()/RAND_MAX*10.;
-   if (cave->isBelowStalagtite(x, y) && cave->isAboveStalagmite(x, y)) {
-     GetBody()->SetTransform(b2Vec2(x, y), GetBody()->GetAngle());
-     break;
-   }
- }
+  GetBody()->SetTransform(cave->GeneratePointInside(), GetBody()->GetAngle());
 }
