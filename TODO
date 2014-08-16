@@ -1,0 +1,15 @@
+Game logic:
+create player class
+add health field
+Add health strength bar (white rectagle with red rectangle on top that gets shorter?)
+if health > 0, hitting enemy drops healths.
+if health < 0, player dies
+3 lives
+collecting diamonds adds health
+level ends when all diamonds collected
+
+
+multiple levels
+random levels
+more interesting enemies
+laser gun
