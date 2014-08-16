@@ -9,7 +9,6 @@ Cave::Cave(QGraphicsScene* scene, QtBox2DEngine* engine):
   _stalagtites{0,0,0,0,1,1,2,2,1,1,1,3,1,0,0,1,4,0,0,1,0,0,0,0,2,2,2,2,2,3,3,4,4,3,0,0,0,0,0,1}, 
   _stalagmites{0,0,0,0,2,2,2,2,2,3,3,4,4,3,0,0,0,0,0,1,0,0,0,0,1,1,2,2,1,1,1,3,1,0,0,1,4,0,0,1} {
     _body = _engine->createBody(b2_staticBody, 0, 0, 0, false);
-    QList<QGraphicsItem*> items;
     QPolygonF points;
 
     for (unsigned int i = 0; i < _stalagtites.size(); ++i)
@@ -41,7 +40,6 @@ Cave::Cave(QGraphicsScene* scene, QtBox2DEngine* engine):
   }
 
 b2Vec2 Cave::GeneratePointInside() {
-  // make this code a method of Cave?
   while (true) {
     float x = (float)qrand()/RAND_MAX*40.;
     float y = (float)qrand()/RAND_MAX*10.;
